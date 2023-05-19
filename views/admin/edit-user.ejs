@@ -1,0 +1,80 @@
+<%- include ('../layouts/header.ejs') %>
+<head>
+      <style>
+         span{
+          color: red;
+          font-size: small;
+        }
+      </style>
+  </head>
+  <section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <h2 class="text-center text-info mb-5">EDIT USER </h2>
+    <div class="edit_user">
+    <form action="" method="post" onsubmit="return validate()">
+
+        <input type="name"  name="name"  class="edit_class" placeholder="Enter Name" value="<%= user.name %>" id="name" onchange="nameValidate()">
+        <br><span id="Name"></span><br>
+        <input type="email" name="email"  class="edit_class" placeholder="Enter Email" value="<%= user.email %>" id="email" onchange="emailValidate()">
+        <br><span id="Email"></span><br>
+        <input type="mobile" name="mno"  class="edit_class" placeholder="Enter Mobile" value="<%= user.mobile %>" id="number" onchange="numberValidate()">
+        <br><span id="Number"></span><br>
+        <input type="hidden" name="id" value="<%= user._id %>">
+        <br><hr>
+        <div  style="display: flex; justify-content: space-between;">
+        <button class="btn-primary rounded reg_but p-1"><a href="/admin/dashboard" class="text-white text-decoration-none">Go Back</a></button>
+        <input type="submit" class="btn-primary reg_but rounded p-1 ms-3"value="Update User" onclick="nameValidate() , emailValidate(), numberValidate()">
+      </div>   
+      </form>
+    </div>
+
+    <script>
+ function nameValidate(){
+    let name=document.getElementById("name").value;
+     if(name ==""){
+      document.getElementById("Name").innerHTML="please enter name";
+      return false
+       }else{
+        document.getElementById("Name").innerHTML="";
+          return true
+       }
+  }
+  function emailValidate(){
+    let emailId=document.getElementById("email").value;
+    console.log("emailId"+emailId);
+    if(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(emailId)==false){
+      document.getElementById("Email").innerHTML="Please enter valid email ";
+      return false;
+    }else{
+      document.getElementById("Email").innerHTML="";
+      return true;
+    }
+  }
+  function numberValidate(){
+    let number=document.getElementById("number").value;
+     if(/^[0-9]+$/.test(number)==false){
+      document.getElementById("Number").innerHTML="please enter a valid number";
+      return false
+     }
+    else if(number.length != 10){
+      document.getElementById("Number").innerHTML="please enter 10 digits";
+      return false
+       }else{
+        document.getElementById("Number").innerHTML="";
+          return true
+       }
+  }
+  function validate(){
+    if(nameValidate()&&emailValidate()&&numberValidate()){
+      return true
+    }else{
+      return false
+    }
+  }
+    </script>
+
+    <%- include ('../layouts/footer.ejs') %>

@@ -1,0 +1,9 @@
+.cart-empty{
+    width: 100%;
+    height: 300px;
+    text-align: center;
+
+}
+.cart-empty a{
+    margin-top: -100px;
+}

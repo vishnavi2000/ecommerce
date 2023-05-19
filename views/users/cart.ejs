@@ -1,0 +1,267 @@
+<%- include ('../layouts/header.ejs') %>
+<nav class="navbar navbar-expand-sm navbar-dark ">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="javascript:void(0)">Logo</a> -->
+      <img src="/image/a.ttire.jpg" alt="" width="auto" height="100px">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="home" >Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="Shop">Shop</a>
+          </li>
+         
+        </ul>
+        <form class="d-flex" action="/logout">
+          <!-- <input class="form-control me-2" type="text" placeholder="Search"> -->
+          <button class="btn" type="button" style="background-color: #d19c97;">Logout</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div>
+  
+<section class="h-100 gradient-custom">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-8">
+          
+          <div class="card mb-4">
+           
+            <div class="card-header py-3">
+              <!-- <h5 class="mb-0">Cart</h5> -->
+              <% if(cartProducts.totalPrice){%>
+                <%for(let key of cartProducts.item){ %>
+              
+            </div>
+         
+            
+            <div class="card-body">
+                
+              <!-- Single item -->
+              
+              <div class="row">
+               
+                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                     
+                  <!-- Image -->
+                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                    <img src="/admin/multer/img/<%=key.productId.image[0] %>"
+                      class="w-100" alt="Blue Jeans Jacket" />
+                      
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                    </a>
+                  </div>
+                  <!-- Image -->
+                </div>
+  
+                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                  <!-- Data -->
+                  <p><strong><%=key.productId.name %></strong></p>
+                  
+                  <p id="price<%-key.productId._id%>"><%=key.productId.price %></p>
+                  
+                  <p id="quantity<%-key.productId._id%>" style="display:none"><%=key.productId.quantity %></p>
+                
+                  
+                  
+                  
+                  <button type="button" class="btn btn-danger btn-sm me-1 mb-2" style="border-radius: 50%;" data-mdb-toggle="tooltip"
+                    title="Remove item">
+                    <a class="text-white "href="/deleteCart?id=<%= key.productId._id %>"><i class="fas fa-trash"></i></a>
+                  </button>
+                  <!-- <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                    title="Move to the wish list">
+                    <i class="fas fa-heart"></i>
+                  </button> -->
+                  <!-- Data -->
+                  
+                </div>
+                
+                
+  
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                  
+                  <div class="d-flex mb-4" style="max-width: 300px">
+                    <button style="background-color:#d19c97;" class="btn  px-3 me-2"
+                      onclick="update('<%= key.productId._id %>',0)">
+                      <i class="fas fa-minus" ></i>
+                    </button>
+  
+                    <div class="form-outline">
+                      <input min="1" max="<%=key.productId.quantity %>" name="quantity" value="<%=key.qty%>" type="number" class="form-control" style="width:60px" id='<%= key.productId._id %>' disabled/>
+                      
+                    </div>
+                   
+  
+                    <button style="background-color:#d19c97;" id="stockOut" class="btn  px-3 ms-2"
+                      onclick="update('<%= key.productId._id %>',1);checkStock('<%= key.productId._id %>')">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+
+
+                  
+                 
+                  <!-- Quantity -->
+                 <p><strong>TOTAL PRICE : </strong> ₹ <span  class=" text-dark fs-6" id="gTotal<%= key.productId._id %>"><%=key.qty*key.productId.price %></span></p>
+  
+                  <!-- Price -->
+                  <p class="text-start text-md-center">
+                   
+                  </p>
+                  <!-- Price -->
+                                
+                 </div>
+              </div>
+              <!-- Single item -->
+              
+              <hr class="my-4" />
+              <% }%>
+  
+              <!-- Single item -->
+              
+              <!-- Single item -->
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <p><strong>Expected shipping delivery</strong></p>
+              <p class="mb-0">12.10.2020 - 14.10.2020</p>
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body">
+              <p><strong>We accept</strong></p>
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                alt="Visa" />
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                alt="American Express" />
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                alt="Mastercard" />
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+                alt="PayPal acceptance mark" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Summary</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <!-- <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Cart Total
+                  <span><h5 class="text-dark"> <% if(id){ %>
+                    ₹ <%= cartProducts.totalPrice %>
+                    <% } %></h5></span>
+                </li> -->
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Shipping
+                  <span class="text-dark">Free</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount </strong>
+                    <strong>
+                      
+                    </strong>
+                  </div>
+                  <span id="gTotal"><h5 class="text-dark"> <% if(id){ %>
+                    ₹ <%= cartProducts.totalPrice %>
+                    <% } %></h5></span>
+                </li>
+              </ul>
+  
+             <a href="/checkout"> <button type="button" class="btn btn-lg btn-block" style="background-color:#d19c97;" >
+                Go to checkout
+              </button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </section>
+  
+  <% }else{ %>
+    <div class="cart-empty">
+    <h4>Your Cart is Empty !!<br></h4><br>
+    <a href="/Shop"><button class="btn btn-primary">continue shoping</button></a><br>
+    <img src="/image/empty cart.gif" alt="">
+    
+   </div>
+    <% } %>
+
+    <script>
+        function checkStock(id) {
+  const stockQuantityElement = document.getElementById('quantity' + id);
+ 
+  const stockQuantity = parseInt(stockQuantityElement.innerHTML);
+  const qtyElement = document.getElementById(id);
+  const enteredQuantity = parseInt(qtyElement.value);
+
+  if (enteredQuantity > stockQuantity) {
+    document.getElementById('stockOut').disabled = true;
+  } else {
+    document.getElementById('stockOut').disabled = false;
+  }
+}
+
+
+
+      
+      function update(id,plus){
+        // console.log("id===="+id);
+        const qty= document.getElementById(id)
+        console.log("prodQty====================="+qty.value);
+     
+        if(plus){
+          
+          qty.parentNode.querySelector('input[type=number]').stepUp()
+         
+        }else {
+          qty.parentNode.querySelector('input[type=number]').stepDown()
+        }
+        price = document.getElementById('price'+id).innerHTML
+        // console.log("price======="+price);
+                                          
+        document.getElementById('gTotal'+id).innerHTML= qty.value*price
+        // console.log("qty===="+qty.value,price);
+        $.ajax({
+          url:'/updateCart',
+          type:'POST',
+          data:{quantity:qty.value,_id:id},
+          success:function(data){
+            // console.log(data.total);
+
+            document.getElementById('gTotal').innerHTML= `<h5 class="text-dark">₹ ${data.total}</h5>`
+          },
+          error:function(jqXHR, textStatus, errorThrown){
+            console.log(texrStatus,errorThrown);
+          }
+        })
+      }
+    </script>
+
+   
+
+
+
+
+   
+
+  <%- include ('../layouts/footer.ejs') %>
+  

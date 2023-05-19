@@ -1,0 +1,15 @@
+
+.container-mob{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-mob .card-header{
+    background-color: #d19c97;
+}
+
+.container-mob .but-otp{
+    background-color:#d19c97;
+}

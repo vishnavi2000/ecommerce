@@ -1,0 +1,443 @@
+<%- include ('../layouts/header.ejs') %>
+<!-- <head>
+    <style>
+        div{
+            border:5px solid red
+        }
+    </style>
+</head> -->
+<!-- Topbar Start -->
+
+<div class="row align-items-center py-3 px-xl-5" style="max-width: 1530px;">
+  <div class="col-lg-3 d-none d-lg-block">
+    <img src="/image/a.ttire.jpg" alt="" width="auto" height="100px">
+  </div>
+  <div class="col-lg-6 col-6 text-left">
+    <form action="">
+      <div class="input-group">
+        <input type="text" id="search" onkeyup="update()" name="search" class="form-control" placeholder="Search for products">
+        <div class="input-group-append">
+          <span class="input-group-text bg-transparent text-dark  ">
+            <i class="fa fa-search"></i>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-lg-3 col-6 text-right">
+    <a href="" class="btn border p-2" style="background-color: #d19c97;">
+      <i class="fa-solid fa-wallet"></i>
+
+    </a>
+    <a href="cart" class="btn border p-2" style="background-color: #d19c97;">
+      <i class="fas fa-shopping-cart text-dark"></i>
+
+    </a>
+  </div>
+</div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+
+<!-- Navbar End -->
+
+
+<!-- Page Header Start -->
+
+<!-- Page Header End -->
+
+
+<!-- Shop Start -->
+<div class="container-fluid pt-5">
+  <div class="row px-xl-5">
+    <!-- Shop Sidebar Start -->
+    <div class="col-lg-3 col-md-12">
+      <!-- Price Start -->
+      <!-- <div class="border-bottom mb-4 pb-4">
+                    <h5 class="font-weight-semi-bold mb-4">filter by Price</h5>
+                    
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input filter" onchange="update()" value="All" checked id="price-all">
+                            <label class="custom-control-label" for="price-all">All Price</label>
+                             <span class="badge border font-weight-normal">1000</span> 
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input filter" onchange="update()" value="0-500" id="price-1">
+                            <label class="custom-control-label" for="price-1">below 500</label>
+                            
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input filter" onchange="update()" value="500-1000" id="price-2">
+                            <label class="custom-control-label" for="price-2">500-1000</label>
+                           
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input filter" onchange="update()" value="1000-2000" id="price-3">
+                            <label class="custom-control-label" for="price-3">1000-2000</label>
+                            
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input filter" onchange="update()" value="2000-5000" id="price-4">
+                            <label class="custom-control-label" for="price-4">2000 & above</label>
+                          
+                        </div>
+                     
+                    
+                </div>  -->
+      <!-- Price End -->
+
+      <!--sort by price-->
+      <div class="border-bottom mb-4 pb-4">
+        <h5 class="font-weight-semi-bold mb-4">sort by</h5>
+
+
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" onchange="update()" name="sort" checked value="0" class="sort custom-control-input" id="sort-1">
+          <label class="custom-control-label" for="sort-1">latest arrival</label>
+          <!-- <span class="badge border font-weight-normal">150</span> -->
+        </div>
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" onchange="update()" name="sort" value="1" class="sort custom-control-input" id="sort-2">
+          <label class="custom-control-label" for="sort-2">lowest to highest</label>
+          <!-- <span class="badge border font-weight-normal">295</span> -->
+        </div>
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" onchange="update()" name="sort" value="-1" class="sort custom-control-input" id="sort-3">
+          <label class="custom-control-label" for="sort-3">highest to lowest</label>
+          <!-- <span class="badge border font-weight-normal">246</span> -->
+        </div>
+
+
+
+      </div>
+
+      <!--end sort by price-->
+
+      <!-- Color Start -->
+      <div class="border-bottom mb-4 pb-4">
+        <h5 class="font-weight-semi-bold mb-4">Category</h5>
+
+
+        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+          <input type="checkbox" onchange="update()" value="0" class="category custom-control-input" id="color-1">
+          <label class="custom-control-label" for="color-1">Mens</label>
+          <!-- <span class="badge border font-weight-normal">150</span> -->
+        </div>
+        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+          <input type="checkbox" onchange="update()" value="1" class="category custom-control-input" id="color-2">
+          <label class="custom-control-label" for="color-2">Women</label>
+          <!-- <span class="badge border font-weight-normal">295</span> -->
+        </div>
+        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+          <input type="checkbox" onchange="update()" value="2" class="category custom-control-input" id="color-3">
+          <label class="custom-control-label" for="color-3">Kids</label>
+          <!-- <span class="badge border font-weight-normal">246</span> -->
+        </div>
+
+
+
+      </div>
+      <div class="border-bottom mb-4 pb-4">
+        <h5 class="font-weight-semi-bold mb-4">show </h5>
+
+
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" name="limit" value="12" onchange="update()" checked class="limit custom-control-input" id="limit-1">
+          <label class="custom-control-label" for="limit-1">show All</label>
+          <!-- <span class="badge border font-weight-normal">150</span> -->
+        </div>
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" name="limit" value="3" onchange="update()" class="limit custom-control-input" id="limit-2">
+          <label class="custom-control-label" for="limit-2">show : 3</label>
+          <!-- <span class="badge border font-weight-normal">295</span> -->
+        </div>
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" name="limit" value="6" onchange="update()" class="limit custom-control-input" id="limit-3">
+          <label class="custom-control-label" for="limit-3">show : 6</label>
+          <!-- <span class="badge border font-weight-normal">246</span> -->
+        </div>
+        <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+          <input type="radio" name="limit" value="9" onchange="update()" class="limit custom-control-input" id="limit-4">
+          <label class="custom-control-label" for="limit-4">show : 9</label>
+          <!-- <span class="badge border font-weight-normal">246</span> -->
+        </div>
+
+
+
+      </div>
+    </div>
+    <!-- Shop Sidebar End -->
+
+
+    <!-- Shop Product Start -->
+    <div class="col-lg-9 col-md-12">
+
+      <div class="row pb-3">
+        <div id="products" class="row pb-3">
+          <% if(products){ %>
+          <% for (let i=0;i< products.length;i++){ %>
+          <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+            <div class="card product-item border-0 mb-4">
+
+              <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                <% if(products[i].image){ %>
+                <img class="" width="316px" height="350px" src="/admin/multer/img/<%=products[i].image[0] %>" alt="">
+                <% }%>
+              </div>
+              <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                <h6 class="text-truncate mb-3"><%= products[i].name %></h6>
+                <div class="d-flex justify-content-center">
+                  <h6>INR <%= products[i].price %>.00</h6>
+                  <h6 class="text-muted ml-2"><del>123.00</del></h6>
+                </div>
+              </div>
+              <div class="card-footer d-flex justify-content-between bg-light border">
+                <a href="productDetails?id=<%-products[i].id %>" class="btn btn-sm  p-0" style="color:#d19c97"><i class="fas fa-eye text-dark mr-1"></i>View Detail</a>
+                <a href="/addToCart?id=<%=products[i].id %>" class="btn btn-sm  p-0" style="color:#d19c97"><i class="fas fa-shopping-cart text-dark mr-1"></i>Add To Cart</a>
+              </div>
+            </div>
+          </div>
+          <%}} else{%>
+          <div class="flex-c-m flex-w w-full p-t-45">
+            <span>NO product</span>
+          </div>
+
+          <% } %>
+        </div>
+
+
+
+
+
+        <div class="col-12 pb-1">
+          <nav id="pagnation" aria-label="Page navigation">
+            <ul class="pagination justify-content-center mb-3">
+              <% if(pageCount >0){
+                            for(i=0;i<pageCount.length;i++){%>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <% }} %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- Shop Product End -->
+  </div>
+</div>
+<!-- Shop End -->
+
+
+<!-- Footer Start -->
+<!--footer start-->
+<div class="container-fluid  text-dark mt-5 pt-5" style="background-color: #EDf1ff;">
+  <div class="row px-xl-5 pt-5">
+    <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+      <a href="" class="text-decoration-none">
+        <!-- <img src="/image/a.ttire.jpg" alt="" width="200px" height="100px"> -->
+      </a>
+      <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
+      <p class="mb-2"><i class="fa fa-map-marker-alt  mr-3" style="color: #d19c97;"></i>123 Street, New York, USA</p>
+      <p class="mb-2"><i class="fa fa-envelope  mr-3" style="color: #d19c97;"></i>info@example.com</p>
+      <p class="mb-0"><i class="fa fa-phone-alt mr-3" style="color: #d19c97;"></i>+012 345 67890</p>
+    </div>
+    <div class="col-lg-8 col-md-12">
+      <div class="row">
+        <div class="col-md-4 mb-5">
+          <h5 class="font-weight-bold  mb-4" style="color: #d19c97;">Quick Links</h5>
+          <div class="d-flex flex-column justify-content-start">
+            <a class="text-dark mb-2 text-decoration-none" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+            <a class="text-dark mb-2 text-decoration-none" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+            <a class="text-dark mb-2 text-decoration-none" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+            <a class="text-dark mb-2 text-decoration-none" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+            <a class="text-dark mb-2 text-decoration-none" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+            <a class="text-dark text-decoration-none" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-5">
+          <h5 class="font-weight-bold mb-4" style="color: #d19c97;">Quick Links</h5>
+          <div class="d-flex flex-column justify-content-start">
+            <a class="text-decoration-none text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+            <a class="text-decoration-none text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+            <a class="text-decoration-none text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+            <a class="text-decoration-none text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+            <a class="text-decoration-none text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+            <a class="text-decoration-none text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-5">
+          <h5 class="font-weight-bold  mb-4" style="color: #d19c97;">Newsletter</h5>
+          <form action="">
+            <div class="form-group">
+              <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
+            </div>
+            <div>
+              <button class="btn btn-primary btn-block border-0 py-3 text-dark" type="submit" style="background-color: #d19c97;">Subscribe Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row border-top border-light mx-xl-5 py-4">
+    <div class="col-md-6 px-xl-0">
+      <p class="mb-md-0 text-center text-md-left text-dark">
+        &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+        by
+        <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
+      </p>
+    </div>
+    <div class="col-md-6 px-xl-0 text-center text-md-right">
+      <img class="img-fluid" src="img/payments.png" alt="">
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    let sort = 0
+            let page = 0
+                    function updatePage(pg=0){
+                        page = pg
+                        console.log(page)
+                        update()
+                    }
+            function update(){
+                var elements = document.getElementsByClassName("category");
+                var category = '';
+    for(var i = 0; i < elements.length; i++) {
+        if(elements[i].checked){
+            category = [...category,elements[i].value] 
+        }}
+                console.log('category'+category);
+                var lim = document.getElementsByClassName('limit')
+                var limit
+        for(var i = 0; i < lim.length; i++) {
+        if(lim[i].checked){
+            limit = lim[i].value
+        }}
+        console.log('limit'+limit);
+        var search = document.getElementById('search').value
+        console.log('search'+search);
+        var sortvalue = document.getElementsByClassName('sort')
+        for(var i = 0; i < sortvalue.length; i++) {
+        if(sortvalue[i].checked){
+              sort = sortvalue[i].value
+        }}
+        console.log('sort'+sort);
+        // let filters =[]
+         filter = document.getElementsByClassName('filter')
+    //      for (let index = 0; index < filter.length; index++) {
+    //         if(filter[index].checked){
+    //             if (!filters.includes(filter[index].value)) {
+    //   filters.push(filter[index].value);
+    // }       
+    //      }}
+    //      console.log(filters);
+    //     if(filters.length>1) {
+    //     start = filters[0]
+    //     end = filters[filters.length - 1]
+    //     }else if(filters[0]==0){
+    //     start = 0
+    //     end = 5000 
+    //     }else{
+    //     start = 0
+    //     end = filters[0]    
+    //     }
+    // if(filter.values.include('All')){
+    //     console.log('all');
+    // }
+    // else{    console.log('start'+start,'end'+end);
+    // for (var i = 0; i < filter.length; i++) {
+    //   if (filter[i].checked) {
+    //     var values = filter[i].value.split("-");
+    //     if (!startValues.includes(values[0])) {
+    //   startValues.push(values[0]);
+    // }
+    // }
+    // }
+    // console.log('start:'+startValues,'end'+endValues);
+    // let start = Infinity
+    // for (var i = 0; i < startValues.length; i++) {
+    //   if (startValues[i] <= start) {
+    //     start = startValues[i];
+    //   }
+    // }
+    // console.log(start);
+    // let end = ''
+    // if (!endValues.includes(Infinity)) {
+    //     for (var i = 0; i < endValues.length; i++) {
+    //   if (endValues[i] <= end) {
+    //     end = endValues[i];
+    //   }
+    // }
+    // }
+    // console.log(end);}
+    
+    
+                console.log(category+'\n'+lim+'\n'+sort+'\n'+search+'\n');
+                console.log('called');
+                const tf = true
+                
+                const url = `/shop?category=${category}&limit=${limit}&sort=${sort}&search=${search}&page=${page}&tf=${tf}`;
+                axios.get(url)
+                .then(res=>{
+                    console.log('data'+res,res.page);
+                products = res.data.products  
+                console.log(products);  
+                document.getElementById('products').innerHTML = `
+                ${products ? products.map(product =>`
+    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+    <div class="card product-item border-0 mb-4">
+    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+    ${product.image ?` <img class="img-fluid w-100" src="/admin/multer/img/${product.image[0]}" alt="">` : ''}
+    </div>
+    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+    <h6 class="text-truncate mb-3">${product.name}</h6>
+    <div class="d-flex justify-content-center">
+    <h6 >${product.price}$</h6><h6 class="text-muted ml-2"><del>123.00</del></h6>
+    </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between bg-light border">
+    <a href="productDetails?id=${product.id}" class="btn btn-sm p-0"style="color:#d19c97"><i class="fas fa-eye text-dark mr-1"></i>View Detail</a>
+    <a href="/addToCart?id=${product.id}" class="btn btn-sm  p-0" style="color:#d19c97"><i class="fas fa-shopping-cart text-dark mr-1"></i>Add To Cart</a>
+    </div>
+    </div>
+    </div>
+    `).join('') : '<div class="flex-c-m flex-w w-full p-t-45"><span>NO product</span></div>' }`;    
+    if(res.data.pageCount ==1){
+    document.getElementById('pagnation').style.display='none';
+    }else{
+      document.getElementById('pagnation').style.display='block';
+    }
+    if (res.data.pageCount > 1) {
+    document.getElementById('pagnation').innerHTML  = `
+    <ul class="pagination justify-content-center mb-3">
+    ${Array.from({ length: res.data.pageCount }).map((_, i) => `
+    <li class="page-item ${page == i ? 'active ' : ''}" id="${i}">
+    <a class="page-link" onclick="updatePage('${i}')">${i+1}</a>
+    </li>
+    `).join('')}
+    </ul>
+    `;
+    }else{
+    if(res.data.page!=0){
+    updatePage()
+    }
+    }
+                })  
+                .catch(Error=>{
+    console.log(Error);
+                })
+    
+    
+                }
+    
+            
+          </script>
+
+<%-include ('../layouts/footer.ejs') %>

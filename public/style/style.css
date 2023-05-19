@@ -1,0 +1,138 @@
+/* 
+
+
+
+
+admin home and dash board
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.but{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+table{
+    width: 50%;
+    margin-left: 50px;
+}
+.email{
+    font-size: 20px;
+}
+.ad_email{
+    font-size: 20px;
+}
+
+
+
+admin ad-user page
+
+ .container{
+    width: 100%;
+    height: 500px;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_sub{
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: rgb(83, 160, 233);
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+::placeholder{
+    color: rgb(107, 103, 103);
+    text-align:center;
+}
+.form_but{
+  margin-left: 50px;
+  width: 150px;
+  height: 30px;
+  border:none;
+  border-radius: 5px;
+
+  
+} 
+
+.form_back{
+    
+    width: 150px;
+    height: 30px;
+    border:none;
+    border-radius: 5px;
+    
+} 
+
+
+
+admin edit user
+
+.edit_user{
+    width: 100%;
+    height: 300px;
+     background-color: aquamarine; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit_class{
+    width:300px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: rebeccapurple;
+}
+
+
+
+.user_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+.user_register{
+    width: 500px;
+    height: 500px;
+
+}
+.user_container .usre_register p{
+    background-color: red;
+    width: 200px;
+    height: 20px;
+}
+
+.reg_but{
+    width: 130px;
+}
+
+
+
+
+
+.admin_login{
+    margin-top: 200px;
+    
+    
+}
+
+
+.login_err_message{
+    text-align: center;
+    
+}
+
+.login_home_container{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+} */

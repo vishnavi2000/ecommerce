@@ -1,0 +1,124 @@
+<%- include('../layouts/header.ejs') %>
+<section class="h-80 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-10 col-xl-8">
+          <div class="card" style="border-radius: 10px;"  >
+            <div class="card-header px-4 py-5">
+              <h5 class="text-muted mb-0 ">Thanks for your Order, <span style="color: #d19c97;" class="fs-4"><%= user.name %></span></h5>
+            </div>
+            <div class="card-body p-4" id="container">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0" class="text-dark">Receipt</p>
+              </div>
+
+
+
+              
+              <!-- let key of order.products.item; -->
+             
+              <% for(let i=0; i<order.products.item.length;i++){ %>
+              <div class="card shadow-0 border mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-2" >
+                        <img style="width: -webkit-fill-available" src="/admin/multer/img/<%= order.products.item[i].productId.image[0]%>"
+                          class="img-fluid" alt="lol" >
+                      </div>
+                      
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0"><%= order.products.item[i].productId.name %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">platform:<%=order.products.item[i].productId.platform %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Category:<%=order.products.item[i].productId.category %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Qty:<%=order.products.item[i].qty %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">₹.<%=order.products.item[i].productId.price %></p>
+                    </div>
+                   
+                    <!-- <div class="text-center d-flex" style="margin-left: 35vw;">
+                      <a href="" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Return Product</a>
+                    </div>
+                   
+                      <p class="text-muted mb-0" style="margin-left: 37vw;">Product Returned</p> -->
+                 
+                  </div>
+                  <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                </div>
+              </div>
+                <% }%>
+
+
+              <div class="d-flex justify-content-between pt-2">
+                <div class="mb-0">
+                  <p class="text-muted mb-0">Track Order</p>
+                </div>
+                <div class="mb-0">
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-muted mt-1 mb-0 ms-xl-5"> <%=order.status %></p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">Order Details</p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4 text-dark fs-5">Total</span> ₹.<%=order.products.totalPrice %></p>
+              </div>
+  
+              <div class="d-flex justify-content-between pt-2">
+                <p class="text-muted mb-0">Invoice Number :<%= order._id %></p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4 fs-5 text-dark">Discount</span> ₹.0</p>
+              </div>
+  
+              <div class="d-flex justify-content-between">
+                <p class="text-muted mb-0">Invoice Date :<span class="text-dark"><%= order.createdAt %></span></p>
+                
+              </div>
+  
+              <div class="d-flex justify-content-between mb-5">
+                <p class="text-muted mb-0">Recepit Coupon : <%=order.offer %></p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4 text-dark fs-5">Delivery Charges</span> Free</p>
+              </div>
+            </div>
+
+            <div class="card-footer border-0 px-4 py-5 bg-muted d-flex align-items-center justify-content-between "
+              style=" border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+              <button  id="downloadPdfBtn" class="btn btn-success">Download Invoice</button>
+              <h5 class=" text-uppercase mb-0">Total
+                paid:₹ <span class="h2 mb-0 ms-2 " style="color: #d19c97;"><%=order.products.totalPrice %></span></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+  <script>
+    window.onload = function () {
+    document.getElementById("downloadPdfBtn")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("container");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 2,
+                filename: 'myfile.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'A4', orientation: 'landscape' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+  </script>
+
+
+
+<%- include('../layouts/footer.ejs') %>

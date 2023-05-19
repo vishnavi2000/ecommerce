@@ -1,0 +1,40 @@
+<%- include ('../layouts/header.ejs') %>
+<style>body{
+  background-color: antiquewhite;
+}
+</style>
+<!-- <div style="background-color: antiquewhite;"> -->
+  <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(41, 102, 102);">
+    <div class="container-fluid">
+      <h4 class="fs-3 text-white">Admin panel</h4>
+    
+        <form class="d-flex align-items-center">
+          <a style="text-decoration: none; color: #fff;" class="btn btn-outline-success" href="/admin/logout">Logout</a>
+        </form>
+
+      </div>
+    </div>
+  </nav>
+<h1 class="text-center text-success mt-3">Welcome <%= admin.name %></h1>
+<hr class="bg-danger line">
+<table>
+  <tr class="t_raw">
+    <td class="email text-secondary ">Email</td>
+    <td class="ad_email text-primary"><%= admin.email %></td>
+  </tr>
+  <tr>
+    <td class="text-secondary email">Mobile</td>
+    <td class="ad_email text-primary"><%= admin.mobile %></td>
+  </tr>
+  <tr class="t_raw">
+    <td class="email text-secondary ">Admin_id</td>
+    <td class="ad_email text-primary"><%= admin._id %></td>
+  </tr>
+</table><br>
+<a class="btn btn-outline-success rounded ms-5" href="/admin/dashboard" >Dashboard</a><br>
+<br><hr class="mt-1">
+
+
+<!-- <button class="btn-info rounded ms-5 mt-5"><a href="/admin/logout" class="text-decoration-none fs-5 p-4 text-white">Logout</a></button> -->
+</div>
+<%- include ('../layouts/footer.ejs') %>

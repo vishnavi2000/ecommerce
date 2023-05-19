@@ -1,0 +1,99 @@
+<%- include('../layouts/header.ejs') %>
+<head>
+  <style>
+     span{
+      color: red;
+      font-size: small;
+    }
+  </style>
+</head>
+<section class="vh-100" style="background-color: #508bfc;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <h2 class="text-center text-info mb-5">USER REGISTRATION</h2>
+<div class="container">
+<form action="" method="post" onsubmit="return Check()">
+  <input type="text" class="form_sub" name="name" placeholder="Enter Name" id="name" onchange="nameCheck()" />
+  <br /><span class="fs-7"id="Name"></span><br />
+  <input type="email"class="form_sub" name="email" placeholder="Enter Email" id="email" onchange="emailCheck()" />
+  <br /><span class="fs-7"id="Email"></span><br />
+  <input type="text" class="form_sub" name="mno" placeholder="Enter Mobile" id="number" onchange="numberCheck()" />
+  <br /><span class="fs-7"id="Number"></span><br />
+  <input
+    type="password" name="password" class="form_sub"placeholder="Enter Password"id="password" onchange="passwordCheck()"/>
+  <br /><span class="fs-7"id="Password"></span><br />
+  <hr > 
+  <div  style="display: flex; justify-content: space-around;">
+  <button class=" btn-primary rounded form_back"><a href="/admin/dashboard" class="text-white text-decoration-none">Go Back</a></button>
+  <input type="submit" class="form_but btn-primary "value="Add User" onclick="nameCheck(),emailCheck(),numberCheck(),passwordCheck()" />
+  </div>
+</form>
+</div>
+
+<% if(typeof message !=='undefined' ) { %>
+<p style="color: red"><%= message %></p>
+<% } %>
+
+
+
+<script>
+  function nameCheck(){
+  let name=document.getElementById("name").value;
+   if(name ==""){
+    document.getElementById("Name").innerHTML="please enter name";
+    return false
+     }else{
+      document.getElementById("Name").innerHTML="";
+        return true
+     }
+}
+function emailCheck(){
+  let emailId=document.getElementById("email").value;
+  console.log("emailId"+emailId);
+  if(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(emailId)==false){
+    document.getElementById("Email").innerHTML="Please enter valid email ";
+    return false;
+  }else{
+    document.getElementById("Email").innerHTML="";
+    return true;
+  }
+}
+function numberCheck(){
+  let number=document.getElementById("number").value;
+   if(/^[0-9]+$/.test(number)==false){
+    document.getElementById("Number").innerHTML="please enter a valid number";
+    return false
+   }
+  else if(number.length != 10){
+    document.getElementById("Number").innerHTML="please enter 10 digits";
+    return false
+     }else{
+      document.getElementById("Number").innerHTML="";
+        return true
+     }
+}
+let password=document.getElementById("password").value; 
+function passwordCheck(){
+  password=document.getElementById("password").value; 
+   if(password.length <6){
+    document.getElementById("Password").innerHTML="please enter minimum 6 digits";
+    return false
+     }else{
+      document.getElementById("Password").innerHTML="";
+        return true
+     }
+}
+function Check(){
+  if(nameCheck()&&emailCheck()&&numberCheck()&&passwordCheck()){
+    return true
+  }else{
+    return false
+  }
+}
+
+</script>
+
+<%- include('../layouts/footer.ejs') %>

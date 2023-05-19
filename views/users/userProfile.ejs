@@ -1,0 +1,498 @@
+<%- include ('../layouts/header.ejs') %>
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+
+
+<nav class="navbar navbar-expand-sm navbar-dark ">
+  <div class="container-fluid">
+    <!-- <a class="navbar-brand" href="javascript:void(0)">Logo</a> -->
+    <img src="/image/a.ttire.jpg" alt="" width="auto" height="100px">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link text-secondary" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-secondary" href="/Shop">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-secondary" href="/cart">Cart</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <!-- <input class="form-control me-2" type="text" placeholder="Search"> -->
+        <button class="btn" type="button" style="background-color: #d19c97;">Logout</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<!-- START: Tabs  -->
+<div class="container">
+  <div class="container row mt-5">
+    <!-- 
+            <div class="col-6">
+                <h3 class="d-inline">Welcome <%= user.name %>
+                </h3>
+                <br><br>
+            </div> -->
+
+  </div>
+</div>
+
+<div class="nk-tabs container">
+  <div class="nk-gap"></div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active text-dark" href="#tabs-1-1" role="tab" data-toggle="tab">User Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="#tabs-1-2" role="tab" data-toggle="tab">Orders</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="#tabs-1-3" role="tab" data-toggle="tab">Address</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="#tabs-1-4" role="tab" data-toggle="tab">wallet</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade show active" id="tabs-1-1">
+      <div class="nk-gap"></div>
+
+      <section class="container">
+        <table class="table ">
+          <thead>
+            <tr style="color: black;">
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr style="color: black;">
+              <td>
+                <%=user.name %>
+              </td>
+              <td>
+                <%= user.email %>
+              </td>
+              <td>
+                <%=user.mobile %>
+              </td>
+              <td><a href="/editUser?id=<%=user._id %>" class="btn ms-2 " style="background-color: #d19c97;">Edit</a></td>
+
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="nk-gap"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tabs-1-2">
+      <div class="nk-gap"></div>
+
+      <section class="container">
+        <table class="table text-light">
+          <thead>
+            <tr style="color: black;">
+              <th scope="col">OrderId</th>
+              <th scope="col">Date Purchased</th>
+              <th scope="col">Payment</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+              <th scope="col">details</th>
+
+            </tr>
+          </thead>
+          <% for(let key of userOrders){ %>
+          <tbody>
+            <tr style="color: black;">
+              <td>
+                <%=key.id %>
+              </td>
+              <td id="curData">
+                <%=key.createdAt.toDateString() %>
+              </td>
+              <td>
+                <%=key.payment %>
+              </td>
+              <td>
+                <%= key.status %>
+              </td>
+              <td><% if(key.status=="Delivered"){%>
+                <% const currentDate = new Date();
+                                        const cutoffDate=new Date()
+                                        cutoffDate.setDate(currentDate.getDate()-14);
+                                        const createdAtDate=new Date(key.createdAt);
+                                        if(createdAtDate <= cutoffDate){ %>
+
+
+                <div id="retBtn">
+                  <button class="btn btn-danger ms-2" onclick="proRet('<%=key._id %>') " disabled>Return order</button><br>
+                </div>
+
+                <a href="/loadReview?id=<%=key._id %>" class=" ms-2 btn btn-success mt-2">add a review</a>
+                <% } else { %>
+                <div id="retBtn">
+                  <button class="btn btn-danger ms-2" onclick="proRet('<%=key._id %>') ">Return order</button><br>
+                </div>
+
+                <a href="/loadReview?id=<%=key._id %>" class=" ms-2 btn btn-success mt-2">add a review</a>
+                <% } %>
+                <%}else if(key.status=="Order Returned"){%>
+                <a href="" class="btn  ms-2 " style="background-color: #d19c97;"> order Returned
+                </a>
+                <a href="/loadReview?id=<%=key._id %>" class=" ms-2 btn btn-success mt-2">add a review</a>
+                <%}else{%>
+                    <% } %>
+                <!-- <table>
+                  <% for (let key of userOrders) { %>
+                  <tbody>
+                    <tr style="color: black;">
+                      <td>
+                        <%= key.id %>
+                      </td>
+                      <td id="curData">
+                        <%= key.createdAt.toDateString() %>
+                      </td>
+                      <td>
+                        <%= key.payment %>
+                      </td>
+                      <td>
+                        <%= key.status %>
+                      </td>
+                      <td>
+                        <% if (key.status === "Delivered") { %>
+                        <% const currentDate = new Date();
+            const cutoffDate = new Date();
+            cutoffDate.setDate(currentDate.getDate() - 14);
+            const createdAtDate = new Date(key.createdAt);
+            if (createdAtDate <= cutoffDate) { %>
+                        <div id="retBtn">
+                          <button class="btn btn-danger ms-2" onclick="proRet('<%= key._id %>')" disabled>Return order</button><br>
+                        </div>
+                        <a href="/loadReview?id=<%= key._id %>" class="ms-2 btn btn-success mt-2">add a review</a>
+                        <% } else { %>
+                        <div id="retBtn">
+                          <button class="btn btn-danger ms-2" onclick="proRet('<%= key._id %>')">Return order</button><br>
+                        </div>
+                        <a href="/loadReview?id=<%= key._id %>" class="ms-2 btn btn-success mt-2">add a review</a>
+                        <% } %>
+                        <% } else if (key.status === "Order Returned") { %>
+                        <a href="#" class="btn ms-2" style="background-color: #d19c97;">Order Returned</a>
+                        <a href="/loadReview?id=<%= key._id %>" class="ms-2 btn btn-success mt-2">add a review</a>
+                        <% } else { %>
+                        <a href="#" class="btn ms-2" style="background-color: #721c14;" onclick="cancelOrder('<%= key._id %>')">Cancel Order</a>
+                        <% } %>
+                      </td>
+                      <td>
+                        <a href="/viewOrder?id=<%= key._id %>" class="btn ms-2" style="background-color: #d19c97;">View Details</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <% } %>
+                </table> -->
+
+              </td>
+
+              <td><a href="/viewOrder?id=<%=key._id %>" class="btn ms-2 " style="background-color: #d19c97;">View
+                  Details</a></td>
+
+            </tr>
+          </tbody>
+          <% } %>
+         
+        </table>
+      </section>
+
+
+      <div class="nk-gap"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tabs-1-3">
+      <div class="nk-gap"></div>
+
+
+      <div class="address">
+        <section class="bg0 p-t-40 p-b-116">
+          <div class="container">
+            <div class="flex-w flex-tr">
+              <div class="size-210 bor10 p-lr-70 p-t-20 p-b-70 p-lr-15-lg w-full-md">
+
+
+                <form action="/addAddress" method="post">
+
+                  <h4 class="mtext-105 cl2 txt-center p-b-30">
+                    ADD ADDRESS
+                  </h4>
+
+                  <!-- <div class="bor8 m-b-20 how-pos4-parent">
+                                          <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
+                                          <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                                      </div>
+              
+                                      <div class="bor8 m-b-30">
+                                          <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="How Can We Help?"></textarea>
+                                      </div>  -->
+
+                  <label>Name *</label>
+                  <input type="text" class="form-control" name="firstname" placeholder="First name" required>
+
+                  <label>Last Name *</label>
+                  <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
+
+
+
+                  <label>Country *</label>
+                  <input type="text" class="form-control" name="country" placeholder="Country" required>
+
+                  <label>address *</label>
+                  <input type="text" class="form-control" placeholder="Address" name="address" required>
+
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label>Town / City *</label>
+                      <input type="text" class="form-control" name="city" placeholder="City" required>
+                    </div><!-- End .col-sm-6 -->
+
+                    <div class="col-sm-6">
+                      <label>State / County *</label>
+                      <input type="text" class="form-control" name="state" placeholder="State" required>
+                    </div><!-- End .col-sm-6 -->
+                  </div><!-- End .row -->
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label>Postcode / ZIP *</label>
+                      <input type="text" class="form-control" name="zip" placeholder="Postcode/ZIP" required>
+                    </div><!-- End .col-sm-6 -->
+
+                    <div class="col-sm-6">
+                      <label>Phone *</label>
+                      <input type="tel" class="form-control" name="mno" placeholder="Phone" required>
+                    </div><!-- End .col-sm-6 -->
+                  </div><!-- End .row -->
+
+                  <!-- <button type="submit" class="btn btn-outline-primary-2">
+                                         <span>Update</span>
+                                         <i class="icon-long-arrow-right"></i>
+                                     </button> -->
+                  <!-- <a href="/dashboard" class="btn btn-outline-primary-2"><span>GO BACK</span><i class="icon-long-arrow-right"></i></a>
+                                      </div> -->
+                  <!-- End .col-lg-9 -->
+                  <br>
+                  <button type="submit" class="btn rounded " style="background-color: #d19c97;">
+                    Submit
+                  </button>
+                </form>
+              </div>
+
+
+              <!-- </div> -->
+
+              <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30  p-lr-15-lg w-full-md">
+
+
+
+
+                <div class="row" style="margin-top: 100px;">
+                  <%if(userAddress.length>0){
+                                        for(let key of userAddress){%>
+                  <div class="col-lg-6">
+                    <div class="card card-dashboard">
+                      <div class="card-body">
+                        <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
+
+                        <p>
+                          <%=key.firstname %>
+                          <%=key.lastname %>
+                          <br>
+                          <%=key.address %>
+                          <%=key.city %>,<%=key.state %><br>
+                          <%= key.country %><br>
+                          pin:<%=key.zip %> <br>
+                          phone:<%=key.mobile %> <br>
+                          <br>
+
+                          <!-- <a href="#">Edit <i class="icon-edit"></i></a> -->
+                          <a href="/deleteAddress?id=<%= key._id %>" class="btn btn-primary"><i class="icon-close"></i>
+                            delete</a>
+                        </p>
+                      </div><!-- End .card-body -->
+                    </div><!-- End .card-dashboard -->
+                  </div><!-- End .col-lg-6 -->
+                  <%}}else{%>
+
+
+
+                  <div class="col-lg-6">
+                    <div class="card card-dashboard">
+                      <div class="card-body">
+                        <h3 class="card-title">Shipping Address</h3>
+                        <!-- End .card-title -->
+
+                        <p>You have not set up this type of address yet.<br>
+                          <a href="">Edit <i class="icon-edit"></i></a>
+                        </p>
+                      </div><!-- End .card-body -->
+                    </div><!-- End .card-dashboard -->
+                  </div><!-- End .col-lg-6 -->
+                  <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade mt-5" id="tabs-1-4">
+            <div class="nk-gap"></div>
+            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card-header">wallet</div>
+                <div class="card-body">
+                  <h5 class="card-title">wallet amount</h5>
+                  <p class="card-text">this wallet amount can be redeemed at the time of purchase</p>
+                  <p>wallet tota : ₹ <span class="fs-6 ms-1 text-white"><%-wallet %></span></p>
+                </div>
+              </div>
+              <div class="nk-gap"></div>
+            </div>
+
+        </section>
+
+
+
+        <div class="nk-gap"></div>
+      </div>
+    </div>
+    <!--footer start-->
+    <div class="container-fluid  text-dark mt-5 pt-5" style="background-color: #EDf1ff;">
+      <div class="row px-xl-5 pt-5">
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+          <a href="" class="text-decoration-none">
+            <!-- <img src="/image/a.ttire.jpg" alt="" width="200px" height="100px"> -->
+          </a>
+          <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
+          <p class="mb-2"><i class="fa fa-map-marker-alt  mr-3" style="color: #d19c97;"></i>123 Street, New York, USA</p>
+          <p class="mb-2"><i class="fa fa-envelope  mr-3" style="color: #d19c97;"></i>info@example.com</p>
+          <p class="mb-0"><i class="fa fa-phone-alt mr-3" style="color: #d19c97;"></i>+012 345 67890</p>
+        </div>
+        <div class="col-lg-8 col-md-12">
+          <div class="row">
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold  mb-4" style="color: #d19c97;">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2 text-decoration-none" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                <a class="text-dark mb-2 text-decoration-none" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                <a class="text-dark mb-2 text-decoration-none" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                <a class="text-dark mb-2 text-decoration-none" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                <a class="text-dark mb-2 text-decoration-none" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                <a class="text-dark text-decoration-none" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold mb-4" style="color: #d19c97;">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-decoration-none text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                <a class="text-decoration-none text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                <a class="text-decoration-none text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                <a class="text-decoration-none text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                <a class="text-decoration-none text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                <a class="text-decoration-none text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold  mb-4" style="color: #d19c97;">Newsletter</h5>
+              <form action="">
+                <div class="form-group">
+                  <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
+                </div>
+                <div>
+                  <button class="btn btn-primary btn-block border-0 py-3 text-dark" type="submit" style="background-color: #d19c97;">Subscribe Now</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row border-top border-light mx-xl-5 py-4">
+        <div class="col-md-6 px-xl-0">
+          <p class="mb-md-0 text-center text-md-left text-dark">
+            &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+            by
+            <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
+          </p>
+        </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+          <img class="img-fluid" src="img/payments.png" alt="">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      function proRet(id) {
+        let orderId = id;
+        console.log(orderId);
+        document.getElementById('retBtn').innerHTML = `<a href="" class="btn  ms-2 " style="background-color: #d19c97;"> order Returned
+                                                </a>`
+        const currentDate = new Date()
+        console.log(currentDate);
+        $.ajax({
+          url: '/returnOrder',
+          type: 'POST',
+          data: {
+            order: orderId
+          }
+
+
+        })
+
+      }
+    </script>
+
+
+    <%- include ('../layouts/footer.ejs') %>

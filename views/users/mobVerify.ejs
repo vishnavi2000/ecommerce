@@ -1,0 +1,28 @@
+<%- include('../layouts/header.ejs') %>
+<div class="container-mob">
+<div class="card text-center" style="width: 300px;">
+    <div class="card-header h5 text-dark ">Password Reset</div>
+    <div class="card-body px-5 " style="background-color: rgb(245, 244, 244);">
+        <!-- <p class="card-text py-2">
+            enter your mobile number
+        </p> -->
+        <div class="form-outline">
+            <form action="/password/pswOtp" method="post">
+            <input type="text" id="typeEmail" name="mobile" class="form-control my-4" placeholder="Mobile number" />
+          
+            <!-- <label class="form-label" for="typeEmail">Email input</label> -->
+           
+        </div>
+        <a href="/password/pswOtp"><button class="btn but-otp w-100" type="submit">Send otp</button></a>
+    </form>
+       </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<%-include ('../layouts/footer.ejs') %>
+
+
+
+

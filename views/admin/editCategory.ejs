@@ -1,0 +1,42 @@
+<%- include ('../layouts/header.ejs') %>
+  <!-- <div class="d-flex align-items-center justify-content-center"> -->
+    <section class="vh-80 form-box"  >
+        <div class="container p-3 h-100 " >
+            <div class="row d-flex justify-content-center align-items-center h-100 ">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5  " style="width:600px;height:600px">
+                
+                    <div class="card shadow-2-strong form-boxes "style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5">Edit Category</h3>
+                            
+                            <form action="/admin/storeCategory?id=<%= cat %>" method="post" >
+
+                                <div class="form-outline mb-4">
+                                    <!-- <label class="form-label" for="email">Email address</label> -->
+                                    <input type="text" id="text" class="form-control form-control-lg"
+                                        value= "<%= catname %>" name="catname">
+                                        
+                                </div>
+
+                                <div class="divider d-flex align-items-center my-4">
+
+                                    <button style="margin-bottom: 30px; width: 200px; background-color: #d19c97;"
+                                    type="submit" class="btn " value="Login">SAVE
+                                    </button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    
+
+
+    <script defer src="https://cdn.crop.guide/loader/l.js?c=PVFYPV"></script>
+
+    <%- include ('../layouts/footer.ejs') %>

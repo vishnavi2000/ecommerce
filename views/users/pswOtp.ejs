@@ -1,0 +1,48 @@
+<%- include('../layouts/header.ejs') %>
+<div class="container-mob">
+    <div class="card text-center" style="width: 300px;">
+        <div class="card-header h5 text-dark ">Enter otp</div>
+        <div class="card-body px-5 " style="background-color: rgb(245, 244, 244);">
+            <!-- <p class="card-text py-2">
+                enter your mobile number
+            </p> -->
+            <form action="/password/VerifyOtp" method="post">
+            <div class="form-outline">
+                
+                <input type="text" id="typeEmail" name="mobOtp" class="form-control my-4" placeholder="enter otp" required/>
+
+                <input  value="<%=otp %>" type="hidden" name="otp">
+               
+                <input  value="<%=mob %>" type="hidden" name="mob">
+               
+                <!-- <label class="form-label" for="typeEmail">Email input</label> -->
+            </div>
+            <span id="timer" class="text-dark"></span>
+            <a href="/password/resendOtp" class="text-decoration-none btn but-otp w-100 mb-2" style="display: none;" id="but">resend otp</a>
+
+            <a href=""><button class="btn but-otp w-100" type="submit">submit</button></a>
+        </form>
+            
+            <div class="d-flex justify-content-between mt-4">
+                <!-- <a class="" href="#">Login</a>
+                <a class="" href="#">Register</a> -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        (function timer() {
+                var sec = 10;
+                var timer = setInterval(function () {
+                    document.getElementById('timer').innerHTML =  + sec;
+                    sec--;
+                    if (sec < 0) {
+                        clearInterval(timer);
+                        document.getElementById('timer').innerHTML = '';
+                        document.getElementById("but").style.display = 'block';
+                    }
+                }, 1000);
+            })()
+    </script>
+
+<%-include('../layouts/footer.ejs') %>
