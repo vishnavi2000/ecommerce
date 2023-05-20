@@ -7,7 +7,7 @@ const Offer=require('../models/offerModel')
 const Category = require('../models/categoryModel')
 const bcrypt = require('bcrypt');
 const sms=require('../middleware/sms')
-const { render } = require('../routes/userRoute');
+//  const { render } = require('../routes/userRoute');
 require ('dotenv').config();
 
 const RazorPay=require('razorpay')
