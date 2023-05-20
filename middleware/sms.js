@@ -4,6 +4,7 @@ const sendMessage=function(mobile,res){
     let randomOtp=Math.floor(Math.random()*10000)
     var options ={
         authorization:"LpKOkcUND4ClatShjgRIH2FVPG1wbn7sx9BfZeE03QrozXA6WdbwJ2VIs6laoPdzDC14KrOtWTuRA0vm",
+   
         message:`your otp verfication code is ${randomOtp}`,
 
         numbers:[mobile]
@@ -21,3 +22,4 @@ const sendMessage=function(mobile,res){
 module.exports={
     sendMessage
 }
+let  a =10;
