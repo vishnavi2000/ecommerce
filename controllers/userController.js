@@ -135,7 +135,6 @@ const loadOtp=async(req,res)=>{
         })
        
         newotp =sms.sendMessage(req.body.mno,res)
-        
         console.log(newotp);
         res.render('otpVerify',{otp:newotp})
     }
