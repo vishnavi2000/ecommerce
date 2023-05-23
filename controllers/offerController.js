@@ -15,6 +15,7 @@ const offer=async(req,res)=>{
 
 const addOffer=async(req,res)=>{
   try{
+    // console.log("hi 1");
     const OfferData=Offer({
       name:req.body.name,
       type:req.body.type,
@@ -23,7 +24,9 @@ const addOffer=async(req,res)=>{
       max_discount:req.body.max_discount
     })
     await OfferData.save()
+    // console.log("hi2");
     res.redirect('offer')
+    // console.log("hi3");
     
 
 
@@ -92,6 +95,7 @@ const deleteOffer=async(req,res)=>{
 
 
 const applyCoupon = async (req, res) => {
+  console.log("sdarffd123456");
   let couponDiscount;
   let couponSave;
   try {

@@ -18,10 +18,10 @@ const OfferSchema = new mongoose.Schema({
         required:true
 
     },
-    max_value:{
-        type:Number,
-        required:true
-    },
+    // max_value:{
+    //     type:Number,
+    //     required:true
+    // },
     max_discount:{
         type:Number,
         required:true

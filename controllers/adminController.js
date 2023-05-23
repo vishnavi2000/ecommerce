@@ -359,7 +359,7 @@ const addproduct =async(req,res)=>{
     })
     await addProducts.save();
     const categorySelecter = await Category.find();
-    res.render('addproduct',{category:categorySelecter , message:"product adding successfull"})
+    res.render('addProduct',{category:categorySelecter , message:"product adding successfull"})
 
 
   }catch(err){
@@ -425,6 +425,7 @@ const storeEditProduct=async(req,res)=>{
         }
       })
     }
+    let a =100
     const productData=await Product.find()
     const category = await Category.find();
     res.render('adminProduct',{category:category,product:productData})
