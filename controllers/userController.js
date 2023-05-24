@@ -573,24 +573,32 @@ const cancelOrder = async(req,res)=>{
     try {
         const id=req.query.id
         // await Orders.deleteOne({_id:id})
-        console.log(id);
+        // console.log(id);
         const myOrder = await Orders.findById({_id : id})
         const userSession=req.session
+        const user = await User.findOne({_id : userSession.user_id})
         if(userSession.user_id){
-            const orderData=await User.findById({_id:userSession.user_id})
-            const productData=await product.find()
-            for(let key of orderData.cart.item){
-                for(let prod of productData){
-                    if(new String(prod._id).trim()==new String(key.productId).trim()){
-                        prod.quantity=prod.quantity+key.qty
-                        console.log("cart-plus==========="+prod.quantity);
-                        await prod.save()
-                    }
-                }
 
-            }  
+            console.log("haiiiiii");
+            console.log(myOrder.products.totalPrice);
+            newWallet= user.wallet+ myOrder.products.totalPrice
+            user.wallet=newWallet
+            await user.save()
+        
+            
+            const productData=await product.find()
+            for(let key of myOrder.products.item){
+              for(let prod of productData){
+                if(new String(prod._id).trim()==new String(key.productId).trim()){
+                  prod.quantity=prod.quantity+key.qty
+                  await prod.save()
+                }
+              }
+            }
+
             myOrder.status = "Cancelled"
             myOrder.save();
+
             console.log("Order Cancelled");
         }
         

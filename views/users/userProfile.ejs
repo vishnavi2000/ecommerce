@@ -149,12 +149,38 @@
 
                 <a href="/loadReview?id=<%=key._id %>" class=" ms-2 btn btn-success mt-2">add a review</a>
                 <% } %>
+
+
+
+
                 <%}else if(key.status=="Order Returned"){%>
-                <a href="" class="btn  ms-2 " style="background-color: #d19c97;"> order Returned
+                <a href="#" class="btn  ms-2 " style="background-color: #d19c97;"> order Returned
                 </a>
                 <a href="/loadReview?id=<%=key._id %>" class=" ms-2 btn btn-success mt-2">add a review</a>
-                <%}else{%>
-                    <% } %>
+
+                <%}else if(key.status=="Cancelled"){%>
+
+                  
+
+                  <a href="#" class="btn  ms-2 " style="background-color: #d19c97;"> Order Cancelled
+                  </a>
+
+                    <% } else  if(key.status!="Cancelled") {%>
+
+                    <div id="retBtn">
+                      <a href="/cancelOrder?id=<%=key._id %>" class="btn btn-danger ms-2" >Cancel Order</a><br>
+                    </div>
+  <% } %>
+
+
+
+
+
+
+
+
+
+
                 <!-- <table>
                   <% for (let key of userOrders) { %>
                   <tbody>
@@ -178,7 +204,7 @@
             cutoffDate.setDate(currentDate.getDate() - 14);
             const createdAtDate = new Date(key.createdAt);
             if (createdAtDate <= cutoffDate) { %>
-                        <div id="retBtn">
+                        <!-- <div id="retBtn">
                           <button class="btn btn-danger ms-2" onclick="proRet('<%= key._id %>')" disabled>Return order</button><br>
                         </div>
                         <a href="/loadReview?id=<%= key._id %>" class="ms-2 btn btn-success mt-2">add a review</a>

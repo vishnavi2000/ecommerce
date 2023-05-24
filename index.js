@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 // mongoose.connect("mongodb://127.0.0.1:27017/attireCloting");
 mongoose.set('strictQuery', true)
-mongoose.connect("mongodb+srv://vaishnavisivankutty:vaish123@cluster0.idueznn.mongodb.net/eshopper");
+mongoose.connect("mongodb+srv://vaishnavisivankutty:vaish123@cluster0.idueznn.mongodb.net/eshopper",()=>{
+  console.log("Database connected");
+});
 const errorHandler = require('./middleware/errorHandler')
 
 const nocache = require("nocache");

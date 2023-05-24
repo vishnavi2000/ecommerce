@@ -99,6 +99,7 @@ user_route.get('/viewOrder',auth.isLogin,userController.viewOrder)
 user_route.post('/addCoupon',auth.isLogin,offerController.applyCoupon)
 
 user_route.post('/returnOrder',auth.isLogin,orderController.returnOrder)
+user_route.post('/cancelOrder',auth.isLogin,orderController.cancelOrder)
 
 user_route.get('/razropayPayment',auth.isLogin,userController.razropayPayment)
 

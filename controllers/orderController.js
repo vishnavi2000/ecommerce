@@ -27,7 +27,12 @@ const orderList=async(req,res)=>{
 }
 
 const cancelOrder = async (req, res) => {
+  
   const id = req.query.id;
+  console.log(id);
+  console.log("Haibdhvcjhagjhvchvmnasvckh");
+  console.log(req.session.user_id);
+
   await Order.deleteOne({ _id: id });
   res.redirect("/admin/orderList");
 };
@@ -77,49 +82,14 @@ const detailView = async(req,res)=>{
 }
 
 
-// const returnOrder=async(req,res)=>{
-//   try{
-    
-//     const id=req.body.order
-//     // await Orders.deleteOne({_id:id})
-//     console.log('100');
-//     console.log(id);
-//     console.log('200');
-//     const userSession=req.session
-//     if(userSession.user_id){
-//       console.log(userSession.user);
-//         const orderData=await User.findById({_id:userSession.user_id})
-//         console.log("orderData===="+orderData);
-//         const productData=await Product.find()
-//         // console.log(productData);
-//         console.log("cart item====="+orderData.cart.item);
-//         console.log("product_data======="+orderData.products.item);
-//         for(let key of orderData.cart.item){
-//             for(let prod of productData){
-//                 if(new String(prod._id).trim()==new String(key.productId).trim()){
-//                     prod.quantity=prod.quantity+key.qty
-//                     console.log("cart-plus==========="+prod.quantity);
-//                     await prod.save()
-//                 }
-//             }
-//         }
-//         await Order.updateOne({_id:id},{$set:{status:"Order Returned"}})
-        
-//     }
-    
-   
-//     res.redirect('/userProfile')
-
-//   }catch(error){
-//     console.log(error);
-//   }
-
-
-    
- 
-// }
 let walletAmount=0;
 let totalWallet;
+
+
+
+
+
+
 const returnOrder = async (req,res)=>{
   try {
 
