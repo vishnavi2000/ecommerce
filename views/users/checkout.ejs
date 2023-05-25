@@ -102,6 +102,7 @@ vertical-gap">
           <div class="col-sm-12 coupon">
             <table>
               <tbody>
+
                 <tr>
                   <td>Discount:<strong class="discountClass text-dark "></strong></span></span>%</td>
                 </tr>
@@ -118,7 +119,9 @@ vertical-gap">
     col-sm-12">
               <p style="color: rgb(253, 106, 8); font-size: medium; padding-top: 10px;">Apply Coupon</p>
               <input type="text" class="col-sm-6 form-control required" name="coupon" id="coupon-input" placeholder="Enter any coupon,if u have and then press enter">
+            
               <p id="message" class="text-danger"></p>
+        
               <button type="submit" id="coupon-btn" style="border-radius: 1rem;margin-top:2rem;padding:.5rem;" class="btn-rounded btn-secondary ">Apply</button>
             </div>
           </div>
@@ -397,7 +400,7 @@ ml-2">login</a>
       </div>
       <script>
         function applyWal(amt) {
-          tot = parseInt('<%=cartProducts.totalPrice %>')
+          tot = parseInt(cartProducts.totalPrice)
           Tamt = parseInt(amt)
           payable = tot - Tamt
           console.log(tot - Tamt);
@@ -413,6 +416,7 @@ ml-2">login</a>
         $('#coupon-btn').click(function(e) {
           e.preventDefault();
           const coupon = $('#coupon-input').val()
+          console.log("value in ejs"+coupon);
           const total = document.getElementById('totalId').innerHTML;
 
 
@@ -425,8 +429,14 @@ ml-2">login</a>
               coupon,
               total
             },
+
+
+
+
+
             success: function(data) {
               console.log(data);
+            
               $('#message').text(data.message);
               $('.discountClass').text(data.couponDiscount);
               $('.discountAmount').text(data.couponSave)

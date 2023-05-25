@@ -30,7 +30,7 @@
                                                 <label class="form-label  select-label" for="form3Example1c"></label>
 
                                                 <select name="sCategory" class="form-control">
-                                                    <option value="<%=product.category%>" disabled selected>Select a Category
+                                                    <option value="<%=product.category%>""><%=product.category%>
                                                     </option>
                                                     <% if(category) { %>
                                                         <% for(let i=0;i < category.length;i++) { %>

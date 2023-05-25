@@ -45,6 +45,13 @@ const deleteOffer=async(req,res)=>{
     console.log(error);
   }
 }
+
+
+
+
+
+
+
 // const applyCoupon=async(req,res)=>{
 //   let couponDiscount
 //   let couponSave
@@ -94,65 +101,136 @@ const deleteOffer=async(req,res)=>{
 // }
 
 
+// const applyCoupon = async (req, res) => {
+//   console.log("sdarffd123456");
+//   let couponDiscount;
+//   let couponSave;
+//   try {
+//     const { coupon } = req.body;
+//     const { user_id } = req.session;
+//     let message = "";
+//     const User = await user.findById(user_id).populate("cart.item.productId");
+
+//     const couponData = await Offer.findOne({ name: coupon });
+//     console.log(couponData);
+//     console.log(User.cart.totalPrice);
+
+//     if (!couponData) {
+//       throw new Error("Coupon not found");
+//     }
+
+//     if (couponData.isExpired) {
+//       throw new Error("Coupon has already expired");
+//     }
+
+//     req.session.offer = {
+//       name: couponData.name,
+//       type: couponData.discount,
+//       discount: couponData.discount,
+//     };
+
+//     let totalPrice =(User.cart.totalPrice);
+//     console.log(totalPrice);
+//     if (isNaN(totalPrice)) {
+//       throw new Error("Total price is NaN");
+//     }
+
+//     let updateTotal;
+//     console.log(couponData.max_value);
+//     if (couponData.usedBy.includes(user_id)) {
+//       message = "Coupon is already used";
+//     } else if (User.cart.totalPrice >= couponData.min_value&& User.cart.totalPrice <= couponData.max_value) {
+//       updateTotal = totalPrice * (couponData.discount / 100);
+
+//       console.log("Update total: " + updateTotal);
+//     } else {
+//       message += "Minimum order value is " + couponData.min_value;
+//     }
+
+//     console.log("Message: " + message);
+//     req.session.couponTotal = updateTotal;
+//     couponDiscount = couponData.discount;
+//     maxAmount = totalPrice - updateTotal;
+
+//     couponData.isExpired = true;
+//     await couponData.save();
+
+//     console.log(couponSave);
+//     res.json({ updateTotal, couponDiscount, maxAmount, message });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+
+
+
+
+
+
 const applyCoupon = async (req, res) => {
-  console.log("sdarffd123456");
-  let couponDiscount;
-  let couponSave;
   try {
     const { coupon } = req.body;
     const { user_id } = req.session;
-    let message = "";
+    console.log(coupon);
+    console.log('a');
     const User = await user.findById(user_id).populate("cart.item.productId");
-
+    console.log('b');
+    if (!User) {
+      throw new Error("User not found");
+    }
+    console.log('c');
     const couponData = await Offer.findOne({ name: coupon });
-    console.log(couponData);
-    console.log(User.cart.totalPrice);
 
     if (!couponData) {
       throw new Error("Coupon not found");
     }
-
-    if (couponData.isExpired) {
-      throw new Error("Coupon has already expired");
-    }
-
+    console.log('d');
+    // if (couponData.isExpired) {
+    //   throw new Error("Coupon has already expired");
+    // }
+    console.log('e');
     req.session.offer = {
       name: couponData.name,
       type: couponData.discount,
       discount: couponData.discount,
     };
-
-    let totalPrice = Number(User.cart.totalPrice);
+    console.log('f');
+    const totalPrice = User.cart.totalPrice;
+    console.log('g');
     if (isNaN(totalPrice)) {
       throw new Error("Total price is NaN");
     }
-
-    let updateTotal;
+    console.log('h');
+    let message = "";
+    let updateTotal = totalPrice;
+    console.log('i');
     if (couponData.usedBy.includes(user_id)) {
       message = "Coupon is already used";
-    } else if (User.cart.totalPrice >= couponData.min_value&& User.cart.totalPrice <= couponData.max_value) {
-      updateTotal = totalPrice * (1 - couponData.discount / 100);
-
-      console.log("Update total: " + updateTotal);
-    } else {
-      message += "Minimum order value is " + couponData.min_value;
+    } else if (
+      totalPrice >= couponData.min_value &&
+      totalPrice <= couponData.max_value
+    ) {
+      updateTotal -= totalPrice * (couponData.discount / 100);
+    }else if(couponData.isExpired){
+      message ="Coupon is Expired"
     }
-
-    console.log("Message: " + message);
+    
+    console.log('j');
     req.session.couponTotal = updateTotal;
-    couponDiscount = couponData.discount;
-    maxAmount = totalPrice - updateTotal;
-
+    const couponDiscount = couponData.discount;
+  
+    const maxAmount = totalPrice - updateTotal;
+    console.log('k');
     couponData.isExpired = true;
     await couponData.save();
-
-    console.log(couponSave);
-    res.json({ updateTotal, couponDiscount, maxAmount, message });
+    console.log('l');
+    res.json({ updateTotal, couponDiscount, maxAmount, message,totalPrice});
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: error.message });
   }
 };
-
 
 
 module.exports={
